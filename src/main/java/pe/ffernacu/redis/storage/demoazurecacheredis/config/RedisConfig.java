@@ -9,14 +9,14 @@ import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSeriali
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 @Configuration
-@EnableCaching
+@EnableCaching//habilita el almacenamiento en cache
 public class RedisConfig{
-    @Bean
+    /*@Bean
     public RedisTemplate redisTemplate(LettuceConnectionFactory redisConnectionFactory){
         RedisTemplate<Object,Object> template = new RedisTemplate<>();
         template.setKeySerializer(new StringRedisSerializer());
         template.setValueSerializer(new GenericJackson2JsonRedisSerializer());
         template.setConnectionFactory(redisConnectionFactory);
         return template;
-    }
+    }*/
 }

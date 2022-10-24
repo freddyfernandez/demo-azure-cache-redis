@@ -1,7 +1,7 @@
 package pe.ffernacu.redis.storage.demoazurecacheredis.service.impl;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import pe.ffernacu.redis.storage.demoazurecacheredis.dao.INacionalidadDao;
@@ -15,13 +15,14 @@ import java.util.Optional;
 @AllArgsConstructor
 public class NacionalidadServiceImpl implements INacionalidadServise {
     private INacionalidadDao nacionalidadDao;
+    @CachePut(value="nacionalidad")
     @Cacheable(value="nacionalidad",unless="#result==null")
     public List<Nacionalidad> listarNacionalidad() {
         return nacionalidadDao.findAll();
     }
+
     @Cacheable(value="nacionalidad",key = "{#id}", unless="#result==null")
     public Optional<Nacionalidad> listarNacionalidadById(Integer id) {
-        Optional<Nacionalidad> listaNacionalidadResponse = nacionalidadDao.findById(id);
-        return listaNacionalidadResponse;
+        return nacionalidadDao.findById(id);
     }
 }
